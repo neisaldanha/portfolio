@@ -1,0 +1,578 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="img/logo_teste.jpg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/home.css">
+    <script src="js/main.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.4.1/dist/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+    
+    <title class="label-menu">INDEX-TESTE</title>
+
+    <script language="javascript">
+        // Valida CPF
+        function valida() {
+            var cpf = document.getElementById('cpf').value
+            var strCPF = String(cpf).replace(/[^\d]/g, '')
+            if (valida_cpf(strCPF))
+                return true;
+            //alert('CPF Válido');
+            else
+                alert('CPF Inválido');
+        }
+
+        function valida_cpf(cpf) {
+            //var cpf = document.getElementById('cpf').value
+            var strCPF = String(cpf).replace(/[^\d]/g, '')
+
+            var numeros, digitos, soma, i, resultado, digitos_iguais;
+            digitos_iguais = 1;
+            if (strCPF.length < 11)
+                return false;
+            for (i = 0; i < strCPF.length - 1; i++)
+                if (strCPF.charAt(i) != strCPF.charAt(i + 1)) {
+                    digitos_iguais = 0;
+                    break;
+                }
+            if (!digitos_iguais) {
+                numeros = strCPF.substring(0, 9);
+                digitos = strCPF.substring(9);
+                soma = 0;
+                for (i = 10; i > 1; i--)
+                    soma += numeros.charAt(10 - i) * i;
+                resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+                if (resultado != digitos.charAt(0))
+                    return false;
+                numeros = strCPF.substring(0, 10);
+                soma = 0;
+                for (i = 11; i > 1; i--)
+                    soma += numeros.charAt(11 - i) * i;
+                resultado = soma % 11 < 2 ? 0 : 11 - soma % 11;
+                if (resultado != digitos.charAt(1))
+                    return false;
+                return true;
+            } else
+                return false;
+        }
+        // FIM Valida CPF
+
+        //Sorteador de nome
+
+        const randomizar = opcoes => opcoes[Math.floor(Math.random() * opcoes.length)];
+
+        const embaralhar = (opcoes) => {
+            return opcoes
+                .split('')
+                .map((a) => ({
+                    sort: Math.random(),
+                    value: a
+                }))
+                .sort((a, b) => a.sort - b.sort)
+                .map(a => a.value)
+                .join('');
+        };
+
+        // Utilização
+
+        const palavras = ['escola', 'casa', 'inverno', 'macaco', 'estudantes'];
+
+        const palavra = randomizar(palavras);
+        const letra = randomizar(palavra);
+        const embaralhado = embaralhar(palavra);
+
+        console.log('palavra', palavra);
+        console.log('letra', letra);
+        console.log('embaralhado', embaralhado);
+
+        /*countdown */
+        $(function() {
+            $('#sorteio').on('click', function() {
+                $('#exampleModal').modal('show');
+                const randomizar = opcoes => opcoes[Math.floor(Math.random() * opcoes.length)];
+
+                const embaralhar = (opcoes) => {
+                    return opcoes
+                        .split('')
+                        .map((a) => ({
+                            sort: Math.random(),
+                            value: a
+                        }))
+                        .sort((a, b) => a.sort - b.sort)
+                        .map(a => a.value)
+                        .join('');
+                };
+
+                // Utilização
+
+                const palavras = ['escola', 'casa', 'inverno', 'macaco', 'estudantes'];
+
+                const palavra = randomizar(palavras);
+                const letra = randomizar(palavra);
+                const embaralhado = embaralhar(palavra);
+
+                console.log('palavra', palavra);
+                console.log('letra', letra);
+                console.log('embaralhado', embaralhado);
+
+            })
+
+        })
+
+
+        function countdown(sec, elem) {
+
+            var element = document.getElementById(elem);
+            element.innerHTML = 'Please wait for ' + sec + ' Seconds';
+
+            if (sec < 1) {
+                clearTimeout(timer);
+                //document.getElementById('#exampleModal').modal('show');
+
+                element.innerHTML = '<h2>O Vencedor foi ' + palavra + '!</h2>'
+                //location.reload()
+                return false;
+
+            }
+            sec--;
+            var timer = setTimeout('countdown(' + sec + ', "' + elem + '" )', 1000);
+        }
+
+        /* ##################### OUTRO COUNTDOWN ###########################*/
+        var width = 400,
+            height = 400,
+            timePassed = 0,
+            timeLimit = 30;
+        var fields = [{
+            value: timeLimit,
+            size: timeLimit,
+            update: function() {
+                return timePassed = timePassed + 1;
+            }
+        }];
+
+        var nilArc = d3.svg.arc()
+            .innerRadius(width / 3 - 133)
+            .outerRadius(width / 3 - 133)
+            .startAngle(0)
+            .endAngle(2 * Math.PI);
+
+        var arc = d3.svg.arc()
+            .innerRadius(width / 3 - 55)
+            .outerRadius(width / 3 - 25)
+            .startAngle(0)
+            .endAngle(function(d) {
+                return ((d.value / d.size) * 2 * Math.PI);
+            });
+
+        var svg = d3.select(".countdown").append("svg")
+            .attr('width', width)
+            .attr('height', height);
+
+        var field = svg.selectAll('.field')
+            .data(fields)
+            .enter().append('g')
+            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
+            .attr('class', "field");
+
+        var back = field.append("path")
+            .attr("class", "path path--background")
+            .attr("d", arc);
+
+        var path = field.append("path")
+            .attr("class", "path path--foreground");
+
+        var label = field.append("text")
+            .attr("class", "label")
+            .attr("dy", ".35em");
+
+        (function update() {
+
+            field
+                .each(function(d) {
+                    d.previous = d.value, d.value = d.update(timePassed);
+                });
+
+            path.transition()
+                .ease("elastic")
+                .duration(500)
+                .attrTween("d", arcTween);
+
+            if ((timeLimit - timePassed) <= 10)
+                pulseText();
+            else
+                label
+                .text(function(d) {
+                    return d.size - d.value;
+                });
+            if (timePassed <= timeLimit)
+                setTimeout(update, 1000 - (timePassed % 1000));
+            else
+                destroyTimer();
+        })();
+
+        function pulseText() {
+            back.classed("pulse", true);
+            label.classed("pulse", true);
+
+            if ((timeLimit - timePassed) >= 0) {
+                label.style("font-size", "120px")
+                    .attr("transform", "translate(0," + +4 + ")")
+                    .text(function(d) {
+                        return d.size - d.value;
+                    });
+            }
+
+            label.transition()
+                .ease("elastic")
+                .duration(900)
+                .style("font-size", "90px")
+                .attr("transform", "translate(0," + -10 + ")");
+        }
+
+        function destroyTimer() {
+            label.transition()
+                .ease("back")
+                .duration(700)
+                .style("opacity", "0")
+                .style("font-size", "5")
+                .attr("transform", "translate(0," + -40 + ")")
+                .each("end", function() {
+                    field.selectAll("text").remove()
+                });
+
+            path.transition()
+                .ease("back")
+                .duration(700)
+                .attr("d", nilArc);
+
+            back.transition()
+                .ease("back")
+                .duration(700)
+                .attr("d", nilArc)
+                .each("end", function() {
+                    field.selectAll("path").remove()
+                });
+        }
+
+        function arcTween(b) {
+            var i = d3.interpolate({
+                value: b.previous
+            }, b);
+            return function(t) {
+                return arc(i(t));
+            };
+        }
+    </script>
+    <style>
+        
+        @import url(https://fonts.googleapis.com/css?family=Open+Sans:800);
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .countdown {
+            margin: auto;
+            width: 400px;
+        }
+
+        .path--background {
+            fill: rgb(34, 213, 201);
+            stroke: #fff;
+            stroke-width: 0px;
+        }
+
+        .pulse {
+            fill: rgb(255, 74, 74);
+        }
+
+        .path--foreground {
+            fill: #eee;
+            stroke: #eee;
+            stroke-width: 2px;
+        }
+
+        .label {
+            font: 90px "Open Sans";
+            font-weight: 900;
+            text-anchor: middle;
+            fill: rgb(34, 213, 201);
+        }
+
+    </style>
+</head>
+
+<body class="sub-menu label-menu">
+
+
+    <div class="countdown"></div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="status">
+                    <script>
+                        countdown(5, "status")
+                    </script>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header>
+        <div class="container">
+            <div class="flex flex-justify-end">
+                <a href="javascript:;"><label for="chk-menu" class="label-menu"><i class="fa-solid fa-eye"></i></i> ACESSIBILIDADE</label></a>
+                <input type="checkbox" id="chk-menu">
+                <nav class="menu flex flex-wrap">
+                    <nav class="sub-menu flex flex-wrap">
+                        <a href="javascript:;" id="change-colors">INVERTER CORES</a>
+                        <a>TAMANHO DA FONTE:</a>
+                        <a href="javascript:;" id="increase-font">A +</a>
+                        <a href="javascript:;" id="normal-font">A</a>
+                        <a href="javascript:;" id="decrease-font">A -</a>
+                    </nav>
+                </nav>
+
+            </div>
+        </div>
+    </header>
+    <main role="main">
+        <form action=" https://autenticador.certisign.com.br/CertisignLogin/certificado/login?id={idDaChave}&nome={nomeDaChave}&retorno={urlDeRetorno}" method="get">
+            <input type="submit" class="btn btn-success" value="Assinar" />
+        </form>
+        <section class="jumbotron text-center label-menu">
+            <div class="container">
+                <h1 class="jumbotron-heading">Album example</h1>
+                <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it entirely.</p>
+                <p>
+                    <a href="#" class="btn btn-primary my-2">Main call to action</a>
+                    <a href="#" class="btn btn-success my-2">Secondary action</a>
+                </p>
+            </div>
+        </section>
+        <input name="cpf" type="text" id="cpf" onchange="valida()" maxlength="14" />
+        <input type="button" name="validar" id="validar" value="Validar CPF" onchange="valida()" />
+        <form method="post" action="">
+            <input type="button" name="sorteio" id="sorteio" value="Sortear" class="btn btn-success" />
+        </form>
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="https://www.oficinadanet.com.br/imagens/post/13422/330xNxandroid.jpg.pagespeed.ic.b2cd0127cc.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text"></p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="https://www.oficinadanet.com.br/imagens/post/13422/330xNxandroid.jpg.pagespeed.ic.b2cd0127cc.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="https://www.oficinadanet.com.br/imagens/post/13422/330xNxandroid.jpg.pagespeed.ic.b2cd0127cc.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="https://www.oficinadanet.com.br/imagens/post/13422/330xNxandroid.jpg.pagespeed.ic.b2cd0127cc.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="https://www.oficinadanet.com.br/imagens/post/13422/330xNxandroid.jpg.pagespeed.ic.b2cd0127cc.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="https://www.oficinadanet.com.br/imagens/post/13422/330xNxandroid.jpg.pagespeed.ic.b2cd0127cc.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="https://www.oficinadanet.com.br/imagens/post/13422/330xNxandroid.jpg.pagespeed.ic.b2cd0127cc.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="https://www.oficinadanet.com.br/imagens/post/13422/330xNxandroid.jpg.pagespeed.ic.b2cd0127cc.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="https://www.oficinadanet.com.br/imagens/post/13422/330xNxandroid.jpg.pagespeed.ic.b2cd0127cc.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                        <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                    </div>
+                                    <small class="text-muted">9 mins</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- The toolbar will be rendered in this container. -->
+                <div id="toolbar-container"></div>
+
+                <!-- This container will become the editable. -->
+                <div id="editor" style="border: grey 1px solid;">
+                    <p>This is the initial editor content.</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer class="text-muted ">
+        <div class="container">
+            <p class="float-right">
+                <a href="#">Back to top</a>
+            </p>
+            <p>Album example is &copy; Bootstrap, but please download and customize it for yourself!</p>
+            <p>New to Bootstrap? <a href="../../">Visit the homepage</a> or read our <a href="../../getting-started/">getting started guide</a>.</p>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <!--<script src="https://cdn.ckeditor.com/4.13.0/standard/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/classic/ckeditor.js"></script>-->
+    <script src="https://cdn.ckeditor.com/ckeditor5/37.0.1/decoupled-document/ckeditor.js"></script>
+    <!-- Versão 5 -->
+    <script>
+    DecoupledEditor
+        .create( document.querySelector( '#editor' ) )
+        .then( editor => {
+            const toolbarContainer = document.querySelector( '#toolbar-container' );
+
+            toolbarContainer.appendChild( editor.ui.view.toolbar.element );
+        } )
+        .catch( error => {
+            console.error( error );
+        } );
+</script>
+    <!-- versão 4.13 
+        <script>
+            CKEDITOR.replace( 'editor' );
+        </script>
+    -->
+</body>
+
+</html>
